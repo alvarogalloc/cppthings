@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.12)
+project(cpp-things VERSION 1.0)
+
+set(CMAKE_CXX_STANDARD 17)
+
+add_executable(benchmark benchmark.cpp)
+add_executable(bookstore bookstore.cpp)
+add_executable(classes classes.cpp)
+add_executable(literals literals.cpp)
+add_executable(cuadratica cuadratica.cpp)
+add_executable(exec_time exec_time.cpp)
+add_executable(isbn-n-transactions isbn-n-transactions.cpp)
+add_executable(pitagoras pitagoras.cpp)
+add_executable(pitagoras_cateto pitagoras_cateto.cpp)
+add_executable(playground playground.cpp)
+add_executable(threads threads.cpp)
+add_executable(type type.cpp)
