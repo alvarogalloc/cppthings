@@ -8,7 +8,7 @@ auto now()
 }
 
 // Return the microseconds that took to call a function
-auto benchmark(std::function<void(std::string, uint16_t)> function)
+int benchmark(std::function<void(std::string, uint16_t)> function)
 {
     const auto start = now();
     function("hola", 100);
@@ -25,7 +25,7 @@ void cout_n_times(std::string text, uint16_t times)
 
 int main()
 {
-    auto duration = benchmark(cout_n_times);
+    const int duration = benchmark(cout_n_times);
     std::cout << "Time taken by function was: " << duration << " microseconds\n";
     return 0;
 }

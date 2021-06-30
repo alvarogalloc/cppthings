@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(cpp-things VERSION 1.0)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Debug)
 
@@ -16,3 +17,4 @@ add_executable(pitagoras_cateto src/pitagoras_cateto.cpp)
 add_executable(playground src/playground.cpp)
 add_executable(threads src/threads.cpp)
 add_executable(type src/type.cpp)
+add_executable(filesystem src/filesystem.cpp)

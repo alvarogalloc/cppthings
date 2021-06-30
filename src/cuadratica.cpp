@@ -9,7 +9,6 @@
 #include <cstdlib>
 #include <iostream>
 
-
 int main(int argc, const char **argv)
 {
     if (argc != 4)
