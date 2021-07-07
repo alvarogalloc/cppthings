@@ -1,5 +1,6 @@
 export module MyList;
-
+#define RESET "\033[0m"
+#define BOLDCYAN "\033[1m\033[36m"
 import<iostream>;
 
 export struct Node {
@@ -27,9 +28,7 @@ public:
   void printList() {
     Node *curr = this->node;
     for (std::size_t i = 0; curr != nullptr; i++) {
-      if (i % 5 == 0)
-        std::cout << '\n';
-      std::cout << i << ": " << curr->data << "    ";
+      std::cout << BOLDCYAN << "Index: " << RESET << i << BOLDCYAN << " Has Value: " << RESET << curr->data << "\n";
       curr = curr->next;
     }
   }

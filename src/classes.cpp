@@ -3,7 +3,6 @@
 
 int main()
 {
-
     /*
     // create an instance of Sales_item
     Sales_item item;
