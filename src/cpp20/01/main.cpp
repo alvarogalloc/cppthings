@@ -1,9 +1,9 @@
 import example;
-import <string>;
-import <vector>;
+import <iostream>;
+#include <algorithm>
 
 int main()
 {
-    gallo gallo1;
-    gallo1.hello("Alvaro");
+    std::cout << hello() << '\n';
+    return 0;
 }

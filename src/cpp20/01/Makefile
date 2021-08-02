@@ -1,14 +1,24 @@
+# module
+# clang++ -Wall -std=c++2a -fimplicit-modules -fimplicit-module-maps -c ${MODULE_SRC}  -Xclang -emit-module-interface -o ${MODULE} 
+# app
+# clang++ -Wall -std=c++2a -fimplicit-modules -fimplicit-module-maps -fprebuilt-module-path=modules main.cpp ${MODULE_SRC} -o $(EXE)
 EXE = cpp_modules
 MODULE_SRC = modules/example.cpp
+APP_SRC = main.cpp
 MODULE = modules/example.pcm
 
-all: module app
+all: module app traditional
 
 module :
-	clang++ -Wall -std=c++2a -fimplicit-modules -fimplicit-module-maps -c ${MODULE_SRC}  -Xclang -emit-module-interface -o ${MODULE} 
+	clang++ -Wall -std=c++2a -fmodules-ts --precompile ${MODULE_SRC} -o ${MODULE}
 
 app : ${MODULE} 
-	clang++ -Wall -std=c++2a -fimplicit-modules -fimplicit-module-maps -fprebuilt-module-path=modules main.cpp ${MODULE_SRC} -o $(EXE)
+	clang++ -Wall -std=c++2a -fimplicit-modules -fimplicit-module-maps -fprebuilt-module-path=modules ${APP_SRC} ${MODULE_SRC} -o ${EXE}
+
+traditional:
+	clang++ -Wall -std=c++2a traditionalway/main.cpp -o traditional
+
+modern: module app
 
 clean :
 	-rm ./$(EXE) ./${MODULE}
