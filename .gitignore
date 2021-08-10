@@ -1,4 +1,4 @@
 build
-.ccls-cache/
+.cache/
 .DS_Store
 compile_commands.json
