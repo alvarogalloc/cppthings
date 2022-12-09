@@ -3,6 +3,7 @@
 #include <vector>
 
 int main() {
+  uint_fast16_t a = 0;
   bool b = 250;
   std::cout << "boolean" << b << std::endl;
   int i = b;

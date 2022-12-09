@@ -1,6 +1,7 @@
 export module example;
 
-
-export auto hello() {
-    return "hellowold from c++20 modules";
+export {
+  namespace gallo {
+      auto hello() { return "hellowold from c++20 modules"; }
+  }  // namespace gallo
 }

@@ -1,7 +1,13 @@
+// #ifdef __cpp_modules
 export module MyList;
-#define RESET "\033[0m"
-#define BOLDCYAN "\033[1m\033[36m"
-import<iostream>;
+import std;
+// #else
+// #define export
+// #include <iostream>
+// #endif
+constexpr auto RESET = "\033[0m";
+
+constexpr auto BOLDCYAN = "\033[1m\033[36m";
 
 export struct Node {
   Node() { this->next = nullptr; }
@@ -9,8 +15,7 @@ export struct Node {
   Node *next;
 };
 export class List {
-
-public:
+ public:
   ~List() { delete this->node; }
   List(int _data) {
     this->node = new Node();
@@ -18,8 +23,7 @@ public:
   }
   void append(int _data) {
     Node *last = this->node;
-    while (last->next != nullptr)
-      last = last->next;
+    while (last->next != nullptr) last = last->next;
     last->next = new Node();
     last->next->data = _data;
     last->next->next = nullptr;
@@ -28,7 +32,8 @@ public:
   void printList() {
     Node *curr = this->node;
     for (std::size_t i = 0; curr != nullptr; i++) {
-      std::cout << BOLDCYAN << "Index: " << RESET << i << BOLDCYAN << " Has Value: " << RESET << curr->data << "\n";
+      std::cout << BOLDCYAN << "Index: " << RESET << i << BOLDCYAN
+                << " Has Value: " << RESET << curr->data << "\n";
       curr = curr->next;
     }
   }
@@ -52,6 +57,6 @@ public:
     this->node = prev;
   }
 
-private:
+ private:
   Node *node;
 };

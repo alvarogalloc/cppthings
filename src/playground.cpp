@@ -1,27 +1,55 @@
-#include <algorithm>
-#include <cctype>
+#include <fmt/core.h>
+
+#include <array>
+#include <functional>
+#include <future>
 #include <iostream>
+#include <string_view>
+#include <utility>
+#include <vector>
 
-std::string reverseString(std::string &str) {
-  std::string reversed;
-  for (int n = str.length() - 1; n >= 0; n--) {
-    reversed.push_back(str[n]);
+class Executor {
+ public:
+  Executor() = delete;
+  static Executor getInstace() {
+    static auto instance = Executor(true);
+    return instance;
   }
-  return reversed;
-}
+  static void add_task(auto func) { getInstace().functions.push_back(func); }
 
+  static void execute_all() {
+    fmt::print("num of functions {}\n", getInstace().functions.size());
+    std::vector<std::future<void>> handles;
+    for (auto fn : getInstace().functions) {
+      handles.push_back(std::async(std::launch::async, fn));
+    }
+    for (auto &handle : handles) {
+      handle.wait();
+    }
+  }
+  ~Executor() = default;
+
+ private:
+  std::vector<std::function<void()>> functions{};
+  Executor(bool real) {
+    functions = {[]() { fmt::print("Helloworld1\n"); },
+                 []() { fmt::print("Helloworld2\n"); },
+                 []() { fmt::print("Helloworld3\n"); },
+                 []() { fmt::print("Helloworld4\n"); },
+                 []() { fmt::print("Helloworld5\n"); },
+                 []() { fmt::print("Helloworld6\n"); }};
+  }
+};
+
+void output() { fmt::print("Helloworld1\n"); }
 int main() {
-  std::cin.tie(nullptr);
-  std::ios_base::sync_with_stdio(false);
-
-  // TODO: fixme.
-  std::string s, r;
-  int n_of_coincidences = 0;
-  std::cin >> s;
-  r = reverseString(s);
-  for (int i = 0; i < s.length(); i++) {
-    if (std::tolower(s[i]) == std::tolower(r[i])) n_of_coincidences++;
-  }
-  std::cout << n_of_coincidences;
-  return 0;
+  using namespace std::literals;
+  Executor::add_task(output);
+  Executor::add_task([]() { fmt::print("Helloworld1\n"); });
+  Executor::add_task([]() { fmt::print("Helloworld2\n"); });
+  Executor::add_task([]() { fmt::print("Helloworld3\n"); });
+  Executor::add_task([]() { fmt::print("Helloworld4\n"); });
+  Executor::add_task([]() { fmt::print("Helloworld5\n"); });
+  Executor::add_task([]() { fmt::print("Helloworld6\n"); });
+  Executor::execute_all();
 }

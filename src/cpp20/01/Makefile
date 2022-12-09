@@ -6,11 +6,12 @@ EXE = cpp_modules
 MODULE_SRC = modules/example.cpp
 APP_SRC = main.cpp
 MODULE = modules/example.pcm
+MODULE_FLAGS = -stdlib=libc++ -fbuiltin-module-map -fmodules-ts -Xclang -emit-module-interface -c
 
 all: module app traditional
 
 module :
-	clang++ -Wall -std=c++2a -fmodules-ts --precompile ${MODULE_SRC} -o ${MODULE}
+	clang++ -Wall -std=c++2a -fmodules ${MODULE_FLAGS} ${MODULE_SRC} -o ${MODULE}
 
 app : ${MODULE} 
 	clang++ -Wall -std=c++2a -fimplicit-modules -fimplicit-module-maps -fprebuilt-module-path=modules ${APP_SRC} ${MODULE_SRC} -o ${EXE}

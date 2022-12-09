@@ -1,9 +1,9 @@
 import example;
 import <iostream>;
-#include <algorithm>
+import <algorithm>;
 
 int main()
 {
-    std::cout << hello() << '\n';
+    std::cout << gallo::hello() << '\n';
     return 0;
 }
