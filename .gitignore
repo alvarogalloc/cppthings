@@ -4,3 +4,7 @@ build
 compile_commands.json
 clip/
 .vscode/
+modules-cache
+**.pcm
+linked_list
+**.out
